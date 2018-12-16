@@ -1,27 +1,51 @@
 # LibraryWorkspace
+This is the main library project. Here the library is developed and tested.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.3.
+### Create a new project library
+```
+ng generate library <library-name> --prefix=<some-prefix>
+```
 
-## Development server
+### Build the library
+```
+ng build my-library
+```
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+### Use the library
+In the app.module of our application
+```
+import { MyLibraryModule } from 'my-library';
 
-## Code scaffolding
+@NgModule({
+  declarations: [AppComponent],
+  imports: [BrowserModule, MyLibraryModule],  // Add it to the imports
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```
 
-## Build
+### Generate new component
+```
+ng g c new-component --project=my-library
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+### Export the component on our library module
+```
+  declarations: [
+    ...
+    NewComponent
+  ],
+  exports: [
+    ...
+    NewComponent
+  ]
+```
 
-## Running unit tests
+### Add the component to the entry file
+This is a redundant but necessary step to do on the library developing process.
+`projects\my-library\src\public_api.ts`
+```
+export * from './lib/new-component/new-component.component';
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+### Watch flag
+After each change on the library we need to rebuild the library.
+The best way to work is runing `ng build example-ng6-lib --watch`
