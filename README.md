@@ -1,6 +1,15 @@
 # LibraryWorkspace
 This is the main library project. Here the library is developed and tested.
 
+## Publish a new version of the library compiled
+You have to have this repo and the library one, on the same parent directory.
+- Parent directory
+|-- library-workspaced
+|-- my-library
+```
+npm run script_publish
+```
+
 ### Create a new project library
 ```
 ng generate library <library-name> --prefix=<some-prefix>
